@@ -6,6 +6,10 @@ import by.tc.task04.pool.impl.ConnectionPoolImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +46,17 @@ public abstract class DAOImpl<T extends Database> implements DAO<T> {
 
     @Override
     public T save(T entity) {
-        return null;
+        try {
+            final Connection connection = pool.takeConnection();
+            Statement statement = connection.createStatement();
+            String sql = insertSql + getValuesForSaving(entity);
+            statement.executeUpdate(sql);
+            statement.close();
+            pool.releaseConnection(connection);
+        } catch (SQLException exception) {
+            LOGGER.error(ENTITY_WAS_NOT_SAVED + exception.getMessage());
+        }
+        return entity;
     }
 
     @Override
@@ -57,13 +71,34 @@ public abstract class DAOImpl<T extends Database> implements DAO<T> {
 
     @Override
     public T update(T entity) {
-        return null;
+        try {
+            final Connection connection = pool.takeConnection();
+            PreparedStatement statement = connection.prepareStatement(updateSql);
+            prepareForUpdate(statement, entity);
+            statement.executeUpdate();
+            statement.close();
+            pool.releaseConnection(connection);
+        } catch (SQLException e) {
+            LOGGER.error(ENTITY_WAS_NOT_UPDATED + e.getMessage());
+        }
+        return entity;
     }
 
     @Override
     public void delete(Long id) {
-
+        try {
+            final Connection connection = pool.takeConnection();
+            PreparedStatement statement = connection.prepareStatement(deleteSql);
+            statement.setLong(1, id);
+            statement.execute();
+            statement.close();
+            pool.releaseConnection(connection);
+        } catch(SQLException e) {
+            LOGGER.error(ENTITY_WAS_NOT_DELETED + e.getMessage());
+        }
     }
+
+    protected abstract void prepareForUpdate(PreparedStatement statement, T entity) throws SQLException;
 
     protected abstract String getValuesForSaving(T entity);
 
