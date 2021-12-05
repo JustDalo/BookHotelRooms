@@ -1,9 +1,15 @@
 package by.tc.task04.pool;
 
+import by.tc.task04.exceptions.ConnectionPoolException;
+
 import java.sql.Connection;
 
 public interface ConnectionPool {
-    Connection takeConnection();
+    Connection takeConnection() throws ConnectionPoolException;
 
-    void releaseConnection(Connection connection);
+    boolean releaseConnection(Connection connection) throws ConnectionPoolException;
+
+    void init() throws ConnectionPoolException;
+
+    void destroy() throws ConnectionPoolException;
 }
