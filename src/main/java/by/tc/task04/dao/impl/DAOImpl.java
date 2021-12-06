@@ -20,7 +20,7 @@ public abstract class DAOImpl<T extends Database> implements DAO<T> {
 
     private static final String FIND_ALL_SQL_TEMPLATE = "select * from %s";
     protected static final String FIND_BY_PARAM_SQL_TEMPLATE = "select * from %s where %s = ?";
-    private static final String SAVE_SQL_TEMPLATE = "INSERT %s(%s) VALUES";
+    private static final String SAVE_SQL_TEMPLATE = "INSERT INTO %s (%s) VALUES ";
     private static final String DELETE_SQL_TEMPLATE = "DELETE FROM %s WHERE id = ?";
     private static final String UPDATE_SQL_TEMPLATE = "UPDATE %s SET %s WHERE id = ?";
     private static final String ENTITY_WAS_NOT_SAVED = "The entity was not saved.";
@@ -46,7 +46,7 @@ public abstract class DAOImpl<T extends Database> implements DAO<T> {
     }
 
     @Override
-    public T save(T entity) throws DAOException {
+    public T save(T entity) {
         try {
             final Connection connection = pool.takeConnection();
             Statement statement = connection.createStatement();
@@ -55,7 +55,7 @@ public abstract class DAOImpl<T extends Database> implements DAO<T> {
             statement.close();
             pool.releaseConnection(connection);
         } catch (SQLException e) {
-            LOGGER.error(ENTITY_WAS_NOT_SAVED + e.getMessage());
+            LOGGER.error(ENTITY_WAS_NOT_SAVED + e);
         }
         return entity;
     }
@@ -78,7 +78,7 @@ public abstract class DAOImpl<T extends Database> implements DAO<T> {
 
     @Override
     public void delete(Long id) {
-
+        
     }
 
     protected abstract void prepareForUpdate(PreparedStatement statement, T entity) throws SQLException;

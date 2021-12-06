@@ -9,8 +9,7 @@ public class User implements Database {
     private String lastName;
 
 
-    public User(long id, String login, String passwordHash, int roleId, String firstName, String lastName) {
-        this.id = id;
+    public User(String login, String passwordHash, int roleId, String firstName, String lastName) {
         this.login = login;
         this.passwordHash = passwordHash;
         this.roleId = roleId;

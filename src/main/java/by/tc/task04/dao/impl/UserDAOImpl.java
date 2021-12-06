@@ -12,6 +12,9 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
     private static final String USER_ID = "id";
     private static final String USER_LOGIN = "login";
     private static final String USER_PASSWORD = "password";
+    private static final String USER_ROLE_ID = "roleId";
+    private static final String USER_FIRST_NAME = "first_name";
+    private static final String USER_LAST_NAME = "last_name";
 
     private static UserDAOImpl instance;
 
@@ -45,12 +48,18 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
 
     @Override
     protected String getValuesForSaving(User entity) {
-        return null;
+        return String.format("('%s', '%s', %d, '%s', '%s')",
+                entity.getLogin(),
+                entity.getPasswordHash(),
+                entity.getRoleId(),
+                entity.getFirstName(),
+                entity.getLastName());
     }
 
     @Override
     protected String getFieldsNames() {
-        return null;
+        return String.format("%s, %s, %s, %s, %s",
+                USER_LOGIN, USER_PASSWORD, USER_ROLE_ID, USER_FIRST_NAME, USER_LAST_NAME);
     }
 
     @Override

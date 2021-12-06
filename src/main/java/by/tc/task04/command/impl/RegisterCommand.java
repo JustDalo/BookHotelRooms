@@ -20,7 +20,7 @@ import java.util.Optional;
 public class RegisterCommand implements Command {
 
     private static final String PASSWORD_PARAMETER = "password";
-    private static final String MAIL_PARAMETER = "mail";
+    private static final String LOGIN_PARAMETER = "login";
     private static final String FIRST_NAME = "first-name";
     private static final String LAST_NAME = "last-name";
     private static final Object LOGIN_IS_EXIST_MSG = "This login is already exist!!";
@@ -33,17 +33,17 @@ public class RegisterCommand implements Command {
     public Routing execute(HttpServletRequest request, HttpServletResponse response) {
         Optional<String> firstName = Optional.ofNullable(request.getParameter(FIRST_NAME));
         Optional<String> lastName = Optional.ofNullable(request.getParameter(LAST_NAME));
-        Optional<String> email = Optional.ofNullable(request.getParameter(MAIL_PARAMETER));
+        Optional<String> login = Optional.ofNullable(request.getParameter(LOGIN_PARAMETER));
         Optional<String> password = Optional.ofNullable(request.getParameter(PASSWORD_PARAMETER));
 
         UserService userService = ServiceFactory.getInstance().getUserService();
         boolean isRegistered;
         try {
             isRegistered = userService.register(
+                    login.orElse(null),
+                    password.orElse(null),
                     firstName.orElse(null),
-                    lastName.orElse(null),
-                    email.orElse(null),
-                    password.orElse(null)
+                    lastName.orElse(null)
             );
         } catch (ServiceException e) {
             logger.error("Unable to register new user. {}", e.getMessage());

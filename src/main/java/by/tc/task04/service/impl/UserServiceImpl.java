@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(String login, String password, String firstName, String lastName) throws ServiceException {
-        User user = new User(1, login, password, 2, firstName, lastName);
+        User user = new User(login, password, 2, firstName, lastName);
 
         UserDAO userDao = DAOFactory.getInstance().getUserDAO();
         try {
