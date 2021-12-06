@@ -1,7 +1,6 @@
 package by.tc.task04.command;
 
-import by.tc.task04.command.impl.HomeCommand;
-import by.tc.task04.command.impl.RegisterCommand;
+import by.tc.task04.command.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +13,9 @@ public class CommandFactory {
 
         commands.put(CommandName.REGISTER_COMMAND, new RegisterCommand());
         commands.put(CommandName.HOME_COMMAND, new HomeCommand());
+        commands.put(CommandName.SHOW_REGISTER_COMMAND, new ShowRegisterCommand());
+        commands.put(CommandName.SHOW_ERROR_404_PAGE_COMMAND, new ShowError404PageCommand());
+        commands.put(CommandName.SHOW_ERROR_500_PAGE_COMMAND, new ShowError500PageCommand());
     }
 
     public static CommandFactory getInstance() {

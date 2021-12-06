@@ -11,7 +11,7 @@
             </div>
 
             <nav class = "nav">
-                <a class = "nav__link" href = "#">Features</a>
+                <a class = "nav__link" href="${pageContext.request.contextPath}/controller?command=show-register">Register</a>
                 <a class = "nav__link" href = "#">Works</a>
                 <a class = "nav__link" href = "#">Our Team</a>
                 <a class = "nav__link" href = "#">Testimonials</a>

@@ -11,6 +11,7 @@
     <title>Register</title>
 </head>
 <body>
+<jsp:include page="components/header.jsp"/>
 <div id="mainContent">
     <h2><fmt:message key="register"/> </h2>
     <c:choose>
@@ -38,5 +39,6 @@
         </c:otherwise>
     </c:choose>
 </div>
+<jsp:include page="components/footer.jsp"/>
 </body>
 </html>

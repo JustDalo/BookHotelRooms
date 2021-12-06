@@ -1,8 +1,10 @@
 package by.tc.task04.command;
 
 public class Routing {
-    private final String resource;
+    public static final Routing ERROR_404 = new Routing(PagePath.ERROR_404_PAGE_REDIRECT, RoutingType.REDIRECT);
+    public static final Routing ERROR_500 = new Routing(PagePath.ERROR_500_PAGE_REDIRECT, RoutingType.REDIRECT);
 
+    private final String resource;
     private final RoutingType type;
 
 
