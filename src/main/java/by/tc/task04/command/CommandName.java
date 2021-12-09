@@ -13,5 +13,7 @@ public class CommandName {
     public static final String LOGIN_COMMAND = "login";
     public static final String SHOW_LOGIN_COMMAND = "show-login";
 
+    public static final String LOGOUT_COMMAND = "logout";
+
     private CommandName() {}
 }

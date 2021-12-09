@@ -15,6 +15,7 @@ public class CommandFactory {
         commands.put(CommandName.SHOW_REGISTER_COMMAND, new ShowRegisterCommand());
         commands.put(CommandName.LOGIN_COMMAND, new LoginCommand());
         commands.put(CommandName.SHOW_LOGIN_COMMAND, new ShowLoginCommand());
+        commands.put(CommandName.LOGOUT_COMMAND, new LogoutCommand());
         commands.put(CommandName.SHOW_ERROR_404_PAGE_COMMAND, new ShowError404PageCommand());
         commands.put(CommandName.SHOW_ERROR_500_PAGE_COMMAND, new ShowError500PageCommand());
     }
