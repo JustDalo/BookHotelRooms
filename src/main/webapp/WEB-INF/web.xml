@@ -17,5 +17,14 @@
         <listener-class>by.tc.task04.pool.ConnectionPoolManager</listener-class>
     </listener>
 
+    <filter>
+        <filter-name>LanguageFilter</filter-name>
+        <filter-class>by.tc.task04.filter.LanguageFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LanguageFilter</filter-name>
+        <servlet-name>controller</servlet-name>
+    </filter-mapping>
 
 </web-app>
