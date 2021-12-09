@@ -14,4 +14,6 @@ public final class PagePath {
 
     public static final String LOGIN_PAGE = "WEB-INF/jsp/login.jsp";
     public static final String LOGIN_PAGE_REDIRECT = "/controller?command=show-login";
+
+    public static final String HOTEL_ROOM_PAGE = "WEB-INF/jsp/hotelRoom.jsp";
 }

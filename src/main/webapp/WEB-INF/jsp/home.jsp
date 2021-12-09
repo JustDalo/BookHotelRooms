@@ -3,8 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
-<fmt:setLocale value="${sessionScope.locale != null ? sessionScope.locale : 'ru'}"/>
-<fmt:bundle basename="labels"/>
+<fmt:setLocale value="${sessionScope.language != null ? sessionScope.language : 'ru'}" scope="session"/>
+<fmt:bundle basename="home"/>
 <!DOCTYPE html>
 <html>
 
@@ -31,97 +31,32 @@
     </div>
 </section>
 
-<!--works-->
-<div class="works">
-    <div class="works__item">
-        <img class="works__photo" src="../../assert/img/hotelRoomOceanView.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
+
+<c:if test="${not empty requestScope.rooms}">
+    <!--works-->
+    <div class="works">
+        <fmt:bundle basename="pagecontent" prefix="book.">
+            <c:forEach var="room" items="${requestScope.rooms}">
+                <a class="works__item"
+                   href="${pageContext.request.contextPath}/controller?command=show-room&id=${room.id}">
+                    <img class="works__photo"
+                         src="${pageContext.request.contextPath}/assert/img/hotelRoomOceanView.jpg"
+                         alt="">
+                    <div class="works__content">
+                        <div class="works__title">
+                            <fmt:message key="room"/> ${room.id}
+                        </div>
+                        <div class="works__text">
+                                ${room.price}$
+                        </div>
+                    </div>
+                </a>
+            </c:forEach>
+        </fmt:bundle>
     </div>
-    <div class="works__item">
-        <img class="works__photo" src="img/Album/1_2.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
-    </div>
-    <div class="works__item">
-        <img class="works__photo" src="img/Album/1_3.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
-    </div>
-    <div class="works__item">
-        <img class="works__photo" src="img/Album/1_4.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
-    </div>
-    <div class="works__item">
-        <img class="works__photo" src="img/Album/2_1.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
-    </div>
-    <div class="works__item">
-        <img class="works__photo" src="img/Album/2_2.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
-    </div>
-    <div class="works__item">
-        <img class="works__photo" src="img/Album/2_3.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
-    </div>
-    <div class="works__item">
-        <img class="works__photo" src="img/Album/2_4.jpg" alt="">
-        <div class="works__content">
-            <div class="works__title">
-                project name
-            </div>
-            <div class="works__text">
-                User Interface Design
-            </div>
-        </div>
-    </div>
-</div> <!--/works-->
+    <!--/works-->
+</c:if>
+
 <jsp:include page="components/footer.jsp"/>
 </body>
 </html>
