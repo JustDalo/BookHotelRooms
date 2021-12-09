@@ -7,6 +7,6 @@
     <title>Hotel booking</title>
 </head>
 <body>
-    <jstl:redirect url="/controller?command=show-register"/>
+    <jstl:redirect url="/controller?command=show-login"/>
 </body>
 </html>

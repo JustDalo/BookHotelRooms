@@ -13,7 +13,5 @@ public interface DAO<T extends Database> {
 
     Optional<T> findById(Long id);
 
-    T update(T entity);
-
     void delete(Long id);
 }

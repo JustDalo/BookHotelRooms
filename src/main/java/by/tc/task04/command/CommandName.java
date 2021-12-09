@@ -10,5 +10,8 @@ public class CommandName {
     public static final String REGISTER_COMMAND = "register";
     public static final String SHOW_REGISTER_COMMAND = "show-register";
 
+    public static final String LOGIN_COMMAND = "login";
+    public static final String SHOW_LOGIN_COMMAND = "show-login";
+
     private CommandName() {}
 }

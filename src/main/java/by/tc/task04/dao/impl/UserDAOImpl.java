@@ -1,14 +1,16 @@
 package by.tc.task04.dao.impl;
 
+import by.tc.task04.dao.SqlThrowingConsumer;
 import by.tc.task04.dao.UserDAO;
 import by.tc.task04.entity.User;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
 public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
-    private static final String USER_TABLE_NAME = "user";
+    private static final String USER_TABLE_NAME = "user_info";
     private static final String USER_ID = "id";
     private static final String USER_LOGIN = "login";
     private static final String USER_PASSWORD = "password";
@@ -16,10 +18,13 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
     private static final String USER_FIRST_NAME = "first_name";
     private static final String USER_LAST_NAME = "last_name";
 
+    private final String findByNameSql;
+
     private static UserDAOImpl instance;
 
     public UserDAOImpl() {
         super(USER_TABLE_NAME);
+        this.findByNameSql = String.format(FIND_BY_PARAM_SQL_TEMPLATE, USER_TABLE_NAME, USER_LOGIN);
     }
 
     public static UserDAOImpl getInstance() {
@@ -37,13 +42,13 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
     }
 
     @Override
-    public Optional<User> findUserByName(String name) {
-        return Optional.empty();
+    public Optional<User> findUserByLogin(String name) {
+        return takeFirstNotNull(
+                findPreparedEntities(whereName(name), findByNameSql));
     }
 
-    @Override
-    protected void prepareForUpdate(PreparedStatement statement, User entity) throws SQLException {
-
+    private static SqlThrowingConsumer<PreparedStatement> whereName(String name) {
+        return statement -> statement.setString(1, name);
     }
 
     @Override
@@ -63,7 +68,12 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
     }
 
     @Override
-    protected String getFieldsNamesForUpdate() {
-        return null;
+    protected User mapResultSet(ResultSet resultSet) throws SQLException {
+        return new User(resultSet.getLong(USER_ID),
+                resultSet.getString(USER_LOGIN),
+                resultSet.getString(USER_PASSWORD),
+                resultSet.getInt(USER_ROLE_ID),
+                resultSet.getString(USER_FIRST_NAME),
+                resultSet.getString(USER_LAST_NAME));
     }
 }

@@ -9,7 +9,10 @@ import by.tc.task04.exceptions.ServiceException;
 import java.util.List;
 
 public interface UserService {
-    User login(String login, String password) throws ServiceException;
+
+    boolean canLogIn(User logUser);
 
     boolean register(String login, String password, String fistName, String lastName) throws ServiceException;
+
+    User findByLogin(String login) throws ServiceException;
 }
