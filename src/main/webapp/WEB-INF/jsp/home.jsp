@@ -38,7 +38,7 @@
         <fmt:bundle basename="pagecontent" prefix="book.">
             <c:forEach var="room" items="${requestScope.rooms}">
                 <a class="works__item"
-                   href="${pageContext.request.contextPath}/controller?command=show-room&id=${room.id}">
+                   href="${pageContext.request.contextPath}/controller?command=show-hotel-room&id=${room.id}">
                     <img class="works__photo"
                          src="${pageContext.request.contextPath}/assert/img/hotelRoomOceanView.jpg"
                          alt="">

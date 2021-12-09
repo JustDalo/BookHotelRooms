@@ -26,14 +26,23 @@
                                     key="login"/> </a>
                         </c:when>
                         <c:otherwise>
-
+                            <c:choose>
+                                <c:when test="${sessionScope.role == 2}">
+                                    <a class="nav__link"
+                                       href="${pageContext.request.contextPath}/controller?command=show-my-bookings"><fmt:message
+                                            key="myBooks"/></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="nav__link"
+                                       href="${pageContext.request.contextPath}/controller?command=show-all-bookings"><fmt:message
+                                            key="allBooks"/></a>
+                                </c:otherwise>
+                            </c:choose>
                             <a class="nav__link"
                                href="${pageContext.request.contextPath}/controller?command=logout"><fmt:message
                                     key="exit"/></a>
                         </c:otherwise>
-
                     </c:choose>
-
                     <a class="nav__link locale" href="${pageContext.request.contextPath}/controller?${pageContext.request.queryString}&lang=ru">RU</a>
                     <a class="nav__link locale" href="${pageContext.request.contextPath}/controller?${pageContext.request.queryString}&lang=en">EN</a>
                 </nav>

@@ -56,7 +56,7 @@
             <c:otherwise>
                 <c:if test="${sessionScope.role == 2}">
                     <a style="margin: 10px; color: darkseagreen;" class="button_book"
-                       href="${pageContext.request.contextPath}/controller?command=show-book&id=${requestScope.room.id}"><fmt:message key="book"/> </a>
+                       href="${pageContext.request.contextPath}/controller?command=show-booking&id=${requestScope.room.id}"><fmt:message key="book"/> </a>
                 </c:if>
             </c:otherwise>
         </c:choose>

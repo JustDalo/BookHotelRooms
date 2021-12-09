@@ -17,5 +17,12 @@ public class CommandName {
 
     public static final String SHOW_HOTEL_ROOM_COMMAND = "show-hotel-room";
 
+    public static final String BOOK_ROOM_COMMAND = "book";
+    public static final String SHOW_BOOK_COMMAND = "show-booking";
+    public static final String SHOW_MY_BOOKINGS = "show-my-bookings";
+    public static final String SHOW_ALL_BOOKINGS = "show-all-bookings";
+
+
+
     private CommandName() {}
 }

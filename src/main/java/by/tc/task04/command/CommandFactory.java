@@ -19,6 +19,12 @@ public class CommandFactory {
 
         commands.put(CommandName.SHOW_HOTEL_ROOM_COMMAND, new ShowHotelRoomCommand());
 
+        commands.put(CommandName.BOOK_ROOM_COMMAND, new BookRoomCommand());
+        commands.put(CommandName.SHOW_BOOK_COMMAND, new ShowBookRoomCommand());
+        commands.put(CommandName.SHOW_ALL_BOOKINGS, new ShowAllBookingsCommand());
+        commands.put(CommandName.SHOW_MY_BOOKINGS, new ShowMyBookingsCommand());
+
+
         commands.put(CommandName.SHOW_ERROR_404_PAGE_COMMAND, new ShowError404PageCommand());
         commands.put(CommandName.SHOW_ERROR_500_PAGE_COMMAND, new ShowError500PageCommand());
     }
